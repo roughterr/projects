@@ -92,6 +92,7 @@ public class DoublyLinkedListElement {
                 return this;
             }
         }
+        return null;
     }
 
     /**
@@ -106,13 +107,14 @@ public class DoublyLinkedListElement {
         return null;
     }
 
-    /**
-     * Змінює попередній елемент.
-     *
-     * @param newPreviousElement
-     * @return
-     */
-    public DoublyLinkedListElement changePreviousElement(DoublyLinkedListElement newPreviousElement) {
-        return new DoublyLinkedListElement(newPreviousElement.changePreviousElement(null, null, 1), nextElement, currentElement);
-    }
+//    /**
+//     * Змінює попередній елемент.
+//     *
+//     * @param newPreviousElement
+//     * @return
+//     */
+//    public DoublyLinkedListElement changePreviousElement(DoublyLinkedListElement newPreviousElement) {
+//        Optional.of();
+//        return new DoublyLinkedListElement(newPreviousElement.changeNextElement(null), nextElement, currentElement);
+//    }
 }

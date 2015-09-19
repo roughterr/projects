@@ -51,24 +51,24 @@ public class DoublyLinkedList {
      * @return спискок із відсутніми видаленими елементами
      */
     private DoublyLinkedList deleteNode(int val) {
-        if (isEmpty()) {
-            return this;
-        }
-        while (true) {
-            //Якщо підлягає видаленню
-            if (getFirstNode().getValue() == val) {
-                return deleteNode(new DoublyLinkedList(this.getFirstNode().getNextElement()));
-            } else {//Якщо не підлягає видаленню
-                //Якщо немає наступного елементу.
-                if (getFirstNode().isThereNextElement()) {
-                    //достаємо другий елемент
-                    final DoublyLinkedListElement secondElement = getFirstNode().getNextElement();
-                    return new DoublyLinkedList(secondElement).deleteNode(val);
-                } else {
-                    return this;
-                }
-            }
-        }
+//        if (isEmpty()) {
+//            return this;
+//        }
+//        while (true) {
+//            //Якщо підлягає видаленню
+//            if (getFirstNode().getValue() == val) {
+//                return deleteNode(new DoublyLinkedList(this.getFirstNode().getNextElement()));
+//            } else {//Якщо не підлягає видаленню
+//                //Якщо немає наступного елементу.
+//                if (getFirstNode().isThereNextElement()) {
+//                    //достаємо другий елемент
+//                    final DoublyLinkedListElement secondElement = getFirstNode().getNextElement();
+//                    return new DoublyLinkedList(secondElement).deleteNode(val);
+//                } else {
+//                    return this;
+//                }
+//            }
+//        }
         //TODO
         return null;
     }
