@@ -105,4 +105,15 @@ public class DoublyLinkedList {
         }
         return true;
     }
+
+    public String toString() {
+        String str = "";
+        if (firstNode == null) {
+            return "It's empty.";
+        }
+        for (Node currNode = firstNode; currNode != null; currNode = currNode.getNextNode()) {
+            str = str + "[" + currNode.getVal() + "], ";
+        }
+        return str.substring(0, str.length() - 2);
+    }
 }
