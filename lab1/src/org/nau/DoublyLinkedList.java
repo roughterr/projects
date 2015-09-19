@@ -13,15 +13,15 @@ public class DoublyLinkedList {
     }
 
     /**
-     * Видаляє усі елементи списку, які містять вказане значення.
+     * Видаляє усі елементи списку, для яких виконується певна умова.
      *
-     * @val
+     * @param condition умова
      */
-    public void deleteElementsWithValue(int val) {
+    public void deleteElements(IntConditionIntf condition) {
         Node firstNormalNode = null;
         Node currNode = firstNode;
         while (currNode != null) {
-            if (currNode.getVal() == val) {
+            if (condition.isConditionSatisfied(currNode.getVal())) {
                 //fix the previous element
                 if (currNode.getPreviousNode() != null) {
                     currNode.getPreviousNode().setNextNode(currNode.getNextNode());
@@ -38,6 +38,19 @@ public class DoublyLinkedList {
             currNode = currNode.getNextNode();
         }
         firstNode = firstNormalNode;
+    }
+
+    /**
+     * Видаляє усі елементи списку, які містять вказане значення.
+     *
+     * @val
+     */
+    public void deleteElementsWithValue(final int valToDelete) {
+        deleteElements(new IntConditionIntf() {
+            public boolean isConditionSatisfied(int val) {
+                return valToDelete == val;
+            }
+        });
     }
 
     /**
