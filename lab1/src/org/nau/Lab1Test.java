@@ -4,7 +4,7 @@ package org.nau;
  * Тестування першої лаби. Варіант №18.
  */
 public class Lab1Test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         //створення структури даних з векторним способом розміщення елементів у пам’яті
         Queue queue = new Queue();
         System.out.println("Empty queue: " + queue);
@@ -17,6 +17,9 @@ public class Lab1Test {
             queue.add(numberToInsert);
             System.out.println("Queue after adding '" + numberToInsert + "': " + queue);
         }
+        //видалення одного елемента з черги
+        queue.deleteOldestElement();
+        System.out.println("After deletion of one element from the queue: " + queue);
         //створення структури даних зі зв’язаним способом розміщення елементів у пам’яті
         DoublyLinkedList doublyLinkedList1 = new DoublyLinkedList();
         System.out.println("Before adding any elements: " + doublyLinkedList1);

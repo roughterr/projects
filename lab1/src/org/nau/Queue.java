@@ -87,7 +87,6 @@ public class Queue {
      * @return true -  операція була виконана успішно
      */
     public boolean add(int val) {
-        //enlarge the data structure
         if (isEmpty())
             oldestElementIndex++;
         if (isFull())
@@ -102,5 +101,22 @@ public class Queue {
     public String toString() {
         return "array='" + Arrays.toString(array) + "', youngestElementIndex='" + youngestElementIndex +
                 "', oldestElementIndex='" + oldestElementIndex + "'.";
+    }
+
+    /**
+     * Видаляє найстаріший елемент з черги.
+     *
+     * @return значення елемента, що видаляється
+     * @throws Exception виключення може бути викинуто якщо в черзі немає елементів
+     */
+    public int deleteOldestElement() throws Exception {
+        if (isEmpty())
+            throw new Exception("there was an attempt to remove an element from an empty queue.");
+        //витягування значення елемента, який має бути видалений
+        final int valueOfDeletedElement = array[oldestElementIndex];
+        System.out.println("The value of the element that is going to be deleted is '" + valueOfDeletedElement + "'.");
+        //індекс настарішого елемента збільшується на одиницю
+        oldestElementIndex++;
+        return valueOfDeletedElement;
     }
 }
