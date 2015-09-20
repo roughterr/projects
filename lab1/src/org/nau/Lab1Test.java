@@ -5,6 +5,19 @@ package org.nau;
  */
 public class Lab1Test {
     public static void main(String[] args) {
+        //створення структури даних з векторним способом розміщення елементів у пам’яті
+        Queue queue = new Queue();
+        System.out.println("Empty queue: " + queue);
+        queue.add(45);
+        System.out.println("Queue after adding 45: " + queue);
+        queue.add(31);
+        System.out.println("Queue after adding 31: " + queue);
+        for (int i = 0; i < 10; i++) {
+            int numberToInsert = i * 4;
+            queue.add(numberToInsert);
+            System.out.println("Queue after adding '" + numberToInsert + "': " + queue);
+        }
+        //створення структури даних зі зв’язаним способом розміщення елементів у пам’яті
         DoublyLinkedList doublyLinkedList1 = new DoublyLinkedList();
         System.out.println("Before adding any elements: " + doublyLinkedList1);
         doublyLinkedList1.addElementToTail(17);
