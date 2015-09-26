@@ -11,6 +11,7 @@ public class Lab1Test {
         //створення структури даних зі зв’язаним способом розміщення елементів у пам’яті
         DoublyLinkedList doublyLinkedList1 = new DoublyLinkedList();
         System.out.println("Empty list: " + doublyLinkedList1);
+        //вставити елементи до першої структури даних (табл. 1.3, кол. 2) і вивести її вміст;
         doublyLinkedList1.addElementToTail(17);
         System.out.println("After adding 17: " + doublyLinkedList1);
         doublyLinkedList1.addElementToTail(12);
@@ -22,6 +23,19 @@ public class Lab1Test {
         //видалити усі від’ємні елементи
         doublyLinkedList1.deleteElements(val -> val < 0);
         System.out.println("After deletion all the negative numbers: " + doublyLinkedList1);
+        //решту елементів використати для обчислення елементів черги, які є сумою цифр елемента списку
+        for (Node element = doublyLinkedList1.getHead(); element != null; element = element.getNextNode()) {
+            String strVal = String.valueOf(element.getVal());
+            int sum = 0;
+            for (char c : strVal.toCharArray()) {
+                int number = Integer.valueOf(String.valueOf(c));
+                sum += number;
+            }
+            System.out.println("Adding element with value '" + sum + "' to the queue...");
+            queue.add(sum);
+        }
+        //вивести вміст черги
+        System.out.println("Final state of the queue: " + queue);
     }
 
     /**

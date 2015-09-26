@@ -46,11 +46,7 @@ public class DoublyLinkedList {
      * @val
      */
     public void deleteElementsWithValue(final int valToDelete) {
-        deleteElements(new IntConditionIntf() {
-            public boolean isConditionSatisfied(int val) {
-                return valToDelete == val;
-            }
-        });
+        deleteElements(val -> valToDelete == val);
     }
 
     /**
@@ -128,5 +124,14 @@ public class DoublyLinkedList {
             str = str + "[" + currNode.getVal() + "], ";
         }
         return str.substring(0, str.length() - 2);
+    }
+
+    /**
+     * Повертає голову списку.
+     *
+     * @return
+     */
+    public Node getHead() {
+        return firstNode;
     }
 }
