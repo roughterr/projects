@@ -6,10 +6,15 @@
     <artifactId>projects</artifactId>
     <version>1</version>
     <packaging>pom</packaging>
+    <build>
+        <sourceDirectory>src</sourceDirectory>
+    </build>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     <modules>
-		<module>lab1</module>
-	</modules>
+        <module>lab1</module>
+    </modules>
 </project>
