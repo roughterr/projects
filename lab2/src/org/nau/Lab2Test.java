@@ -8,6 +8,14 @@ import static org.junit.Assert.assertEquals;
  * Тестування для лаби №2. Варіант 18.
  */
 public class Lab2Test {
+    @Test
+    public void testHashtable() {
+        //Створення нової колекції.
+        NAUHashtable<Double, Rhombus> table = new NAUHashtable<>();
+        final Rhombus rhombus1 = new Rhombus(1, 1, 1, 5, 5, 5, 5, 1);
+        table.put(rhombus1.calculatePerimeter(), rhombus1);
+    }
+
     /**
      * Тестує метод, який вимірює відстань між двома точнами.
      */
@@ -32,20 +40,20 @@ public class Lab2Test {
     public void testMethodCalcAreaRhombus1() {
         final Rhombus rhombus = new Rhombus(3, 4, 4, 4, 4, 3, 3, 3);
         final double area = rhombus.calcuateArea();
-        assertEquals(1.0, area, 0);
+        assertEquals(1.0, area, 0.001);
     }
 
     @Test
     public void testMethodCalcAreaRhombus2() {
         final Rhombus rhombus = new Rhombus(-2, -2, -2, -1, -1, -1, -1, -2);
         final double area = rhombus.calcuateArea();
-        assertEquals(1.0, area, 0);
+        assertEquals(1.0, area, 0.001);
     }
 
     @Test
     public void testMethodCalcAreaRhombus3() {
         final Rhombus rhombus = new Rhombus(0, 0, 3, 2, 6, 0, 3, -2);
         final double area = rhombus.calcuateArea();
-        assertEquals(12.0, area, 0);
+        assertEquals(12.0, area, 0.001);
     }
 }

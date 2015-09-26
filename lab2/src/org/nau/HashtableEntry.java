@@ -2,16 +2,19 @@ package org.nau;
 
 /**
  * Даний клас представляє елемент хеш-таблиці.
+ *
+ * @param <K> тип ключа
+ * @param <V> тип значення
  */
-public class HashtableEntry {
+public class HashtableEntry<K, V> {
     /**
      * Ключ елемента хеш-таблиці.
      */
-    private final int key;
+    private final K key;
     /**
      * Значення елемента хеш-таблиці.
      */
-    private final Rhombus value;
+    private final V value;
 
     /**
      * Конструктор.
@@ -19,7 +22,7 @@ public class HashtableEntry {
      * @param key   ключ елемента хеш-таблиці
      * @param value значення елемента хеш-таблиці
      */
-    public HashtableEntry(int key, Rhombus value) {
+    public HashtableEntry(K key, V value) {
         this.key = key;
         this.value = value;
     }
@@ -29,7 +32,7 @@ public class HashtableEntry {
      *
      * @return
      */
-    public int getKey() {
+    public K getKey() {
         return key;
     }
 
@@ -38,7 +41,7 @@ public class HashtableEntry {
      *
      * @return
      */
-    public Rhombus getValue() {
+    public V getValue() {
         return value;
     }
 }
