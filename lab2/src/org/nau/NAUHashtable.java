@@ -10,19 +10,10 @@ import java.util.Hashtable;
  */
 public class NAUHashtable<K, V> {
     /**
-     * Тут зберігатимуться елементи хеш-тиблиці.
+     * Тут зберігатимуться елементи хеш-тиблиці. Створення представлення для запису, а не рознесено на окремі два масиви
+     * через те, що в Джава не можна створити масив типу дженерік.
      */
     private HashtableEntry<K, V>[] table;
-
-    /**
-     * Ключі елементів хеш-таблиці.
-     */
-    private K[] keys;
-
-    /**
-     * Тут зберігатимуться значення усіх елементів хеш-таблиці.
-     */
-    private V[] values;
 
     /**
      * Розмір хеш-таблиці за замовчуванням.
@@ -133,11 +124,11 @@ public class NAUHashtable<K, V> {
         HashCodeToProbe hashCodeToProbe = new HashCodeToProbe(key.hashCode());
         while (hashCodeToProbe.getH() < table.length) {
             final int index = calcIndexByHashcode(hashCodeToProbe.getHashcode());
-            K element = table[index];
-            K keyFound = table[index].getKey();
-            if (keyFound != null && key.equals(keyFound)) {
+            HashtableEntry<K, V> element = table[index];
+            if (element != null && key.equals(element.getKey())) {
                 return index;
             }
+            hashCodeToProbe = hashCodeToProbe.next();
         }
         return -1;
     }
@@ -152,8 +143,8 @@ public class NAUHashtable<K, V> {
         HashCodeToProbe hashCodeToProbe = new HashCodeToProbe(key.hashCode());
         while (hashCodeToProbe.getH() < table.length) {
             final int index = calcIndexByHashcode(hashCodeToProbe.getHashcode());
-            K keyFound = table[index].getKey();
-            if (keyFound == null)
+            HashtableEntry<K, V> element = table[index];
+            if (element == null)
                 return index;
         }
         return -1;
@@ -168,5 +159,23 @@ public class NAUHashtable<K, V> {
     public V get(K key) {
         int index = findExistingElement(key);
         return index == -1 ? null : table[index].getValue();
+    }
+
+    /**
+     * Виводить інформацію про хеш-таблицю.
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < table.length; i++) {
+            if (table[i] == null) {
+                sb.append("The cell #" + i + " is empty.\n");
+            } else {
+                sb.append("The cell #" + i + " has key '" + table[i].getKey() + "' and value '" + table[i].getValue() + "'.\n");
+            }
+        }
+        return sb.toString();
     }
 }
