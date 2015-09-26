@@ -46,8 +46,9 @@ public class NAUHashtable<K, V> {
      *
      * @param key
      * @param value
+     * @return true - вставка пройшла успішно. false - не вдалось додати елемент
      */
-    public void put(K key, V value) {
+    public boolean put(K key, V value) {
         final int indexOfExisting = findExistingElement(key);
         System.out.println("indexOfExisting='" + indexOfExisting + "'.");
         final int indexToPush;
@@ -55,12 +56,13 @@ public class NAUHashtable<K, V> {
             //Знайти найближчу вільну комірку.
             final int indexOfEmpty = findAvailableRoomForEntry(key);
             if (indexOfEmpty == -1)
-                throw new NoFreeCellsException();
+                return false;
             indexToPush = indexOfEmpty;
         } else {
             indexToPush = indexOfExisting;
         }
         table[indexToPush] = new HashtableEntry<>(key, value);
+        return true;
     }
 
     /**
@@ -92,25 +94,6 @@ public class NAUHashtable<K, V> {
 
         public int getH() {
             return h;
-        }
-    }
-
-
-    /**
-     * Визначає індекс елементу з заданим ключем. Використовує квадратичне зонування до того моменту, поки не знайде
-     * елемент.
-     *
-     * @param key значення ключа елементу
-     * @return індекс. Якщо елемента не знайдено, то повернення
-     */
-    public int calcIndexOfElementWithProbing(K key) {
-        HashCodeToProbe hashCodeToProbe = new HashCodeToProbe(key.hashCode());
-        while (true) {
-            int index = calcIndexByHashcode(hashCodeToProbe.getHashcode());
-            K keyByIndex = table[index].getKey();
-            if (keyByIndex == null) {
-
-            }
         }
     }
 

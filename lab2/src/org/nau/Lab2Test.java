@@ -14,7 +14,10 @@ public class Lab2Test {
         NAUHashtable<Double, Rhombus> table = new NAUHashtable<>();
         final Rhombus rhombus1 = new Rhombus(1, 1, 1, 5, 5, 5, 5, 1);
         table.put(rhombus1.calculatePerimeter(), rhombus1);
-        System.out.println("table: " + table);
+        System.out.println("table after adding the first rhombus: " + table);
+        final Rhombus rhombus2 = new Rhombus(0, 0, 0, 0, 0, 0, 0, 0);
+        table.put(rhombus2.calculatePerimeter(), rhombus2);
+        System.out.println("table after adding the second rhombus: " + table);
     }
 
     /**
