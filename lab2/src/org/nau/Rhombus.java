@@ -1,5 +1,6 @@
 package org.nau;
 
+import java.util.Formatter;
 import java.util.Random;
 
 /**
@@ -117,7 +118,9 @@ public class Rhombus {
 
     @Override
     public String toString() {
-        return "vertex1: " + a + "\n vertex2: " + b + "\n vertex3: " + c + "\n vertex4: " + d;
+        Formatter formatter = new Formatter();
+        formatter.format("vertex1: %1$2s,\n vertex2: %2$2s,\n vertex3: %3$2s,\n vertex4: %4$2s", a, b, c, d);
+        return formatter.toString();
     }
 
     public Vertex getVertexA() {
