@@ -1,5 +1,7 @@
 package org.nau;
 
+import java.util.Random;
+
 /**
  * Ромб: координати вершин, конструктор, методи обчислення площини, периметру, виведення об'єкта.
  */
@@ -101,16 +103,36 @@ public class Rhombus {
      */
     public static Rhombus generateNewRhombus() {
         //Згенерувати дві точки
-        //final Vertex vertex1 = new Vertex((int) java.lang.Math.random() % 100, (int) java.lang.Math.random() % 100);
-        final Vertex vertex1 = new Vertex((int) (java.lang.Math.random() * 10), (int) (java.lang.Math.random() * 10));
-        final Vertex vertex2 = new Vertex((int) (java.lang.Math.random() * 10), (int) (java.lang.Math.random() * 10));
-        final Vertex vertex3 = new Vertex(vertex1.getX() + Math.abs((vertex1.getX() - vertex2.getX())) * 2, vertex1.getY());
-        final Vertex vertex4 = new Vertex(vertex2.getX(), vertex2.getY() - Math.abs((vertex1.getY() - vertex2.getY()) * 2));
-        return new Rhombus(vertex1, vertex2, vertex3, vertex4);
+        final Random random = new Random();
+        final int ax = (int) (random.nextDouble() * 10);
+        final int ay = (int) (random.nextDouble() * 10);
+        final int bx = ax + ((int) (random.nextDouble() * 5));
+        final int by = ay + ((int) (random.nextDouble() * 5));
+        final Vertex a = new Vertex(ax, ay);
+        final Vertex b = new Vertex(bx, by);
+        final Vertex c = new Vertex(ax + Math.abs((ax - bx)) * 2, ay);
+        final Vertex d = new Vertex(bx, by - Math.abs((ay - by) * 2));
+        return new Rhombus(a, b, c, d);
     }
 
     @Override
     public String toString() {
         return "vertex1: " + a + "\n vertex2: " + b + "\n vertex3: " + c + "\n vertex4: " + d;
+    }
+
+    public Vertex getVertexA() {
+        return a;
+    }
+
+    public Vertex getVertexB() {
+        return b;
+    }
+
+    public Vertex getVertexC() {
+        return c;
+    }
+
+    public Vertex getVertexD() {
+        return d;
     }
 }

@@ -28,8 +28,17 @@ public class Lab2Test {
     @Test
     public void testGenerateNewRhombus() {
         Rhombus rhombus1 = Rhombus.generateNewRhombus();
-        System.out.println("Newly generated rhombus: " + rhombus1);
-        //TODO
+        final double ab = Rhombus.calculateDistanceBetweenTwoPoints(rhombus1.getVertexA().getX(),
+                rhombus1.getVertexA().getY(), rhombus1.getVertexB().getX(), rhombus1.getVertexB().getY());
+        final double bc = Rhombus.calculateDistanceBetweenTwoPoints(rhombus1.getVertexB().getX(),
+                rhombus1.getVertexB().getY(), rhombus1.getVertexC().getX(), rhombus1.getVertexC().getY());
+        final double cd = Rhombus.calculateDistanceBetweenTwoPoints(rhombus1.getVertexC().getX(),
+                rhombus1.getVertexC().getY(), rhombus1.getVertexD().getX(), rhombus1.getVertexD().getY());
+        final double da = Rhombus.calculateDistanceBetweenTwoPoints(rhombus1.getVertexD().getX(),
+                rhombus1.getVertexD().getY(), rhombus1.getVertexA().getX(), rhombus1.getVertexA().getY());
+        assertEquals(ab, bc, 0.001);
+        assertEquals(bc, cd, 0.001);
+        assertEquals(cd, da, 0.001);
     }
 
     /**
