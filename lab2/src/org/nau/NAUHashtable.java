@@ -104,14 +104,14 @@ public class NAUHashtable<K, V> {
      * @return індекс елементу. Якщо елемента не знайдено, то повернення значення -1
      */
     public int findExistingElement(K key) {
-        HashCodeToProbe hashCodeToProbe = new HashCodeToProbe(key.hashCode());
-        while (hashCodeToProbe.getH() < table.length) {
+        for (HashCodeToProbe hashCodeToProbe = new HashCodeToProbe(key.hashCode());
+             hashCodeToProbe.getH() < table.length;
+             hashCodeToProbe = hashCodeToProbe.next()) {
             final int index = calcIndexByHashcode(hashCodeToProbe.getHashcode());
             HashtableEntry<K, V> element = table[index];
             if (element != null && key.equals(element.getKey())) {
                 return index;
             }
-            hashCodeToProbe = hashCodeToProbe.next();
         }
         return -1;
     }
