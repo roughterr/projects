@@ -106,7 +106,6 @@ public class NAUHashtable<K, V> {
      * @return індекс елементу. Якщо елемента не знайдено, то повернення значення -1
      */
     public int findExistingElement(K key) {
-        System.out.println("Starting method findExistingElement with argument: key='" + key + "'.");
         for (HashCodeToProbe hashCodeToProbe = new HashCodeToProbe(key.hashCode());
              hashCodeToProbe.getH() < table.length;
              hashCodeToProbe = hashCodeToProbe.next()) {
@@ -114,13 +113,11 @@ public class NAUHashtable<K, V> {
             HashtableEntry<K, V> element = table[index];
             if (element != null) {
                 final boolean resultOfComparison = key.equals(element.getKey());
-                System.out.println("resultOfComparison='" + resultOfComparison + "'.");
                 if (resultOfComparison) {
                     return index;
                 }
             }
         }
-        System.out.println("findExistingElement: the limit is reached.");
         return -1;
     }
 
@@ -137,7 +134,6 @@ public class NAUHashtable<K, V> {
             HashtableEntry<K, V> element = table[index];
             if (element == null)
                 return index;
-            System.out.println("The room is reserved. Probing the next room...");
         }
         return -1;
     }

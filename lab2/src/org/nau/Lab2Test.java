@@ -47,6 +47,13 @@ public class Lab2Test {
                 return 17;
             }
         };
+        //початок виводу площі
+        System.out.println("Rhombus1 has area of '" + rhombus1.calcuateArea() + "'.");
+        System.out.println("Rhombus2 has area of '" + rhombus2.calcuateArea() + "'.");
+        System.out.println("Rhombus3 has area of '" + rhombus3.calcuateArea() + "'.");
+        System.out.println("Rhombus4 has area of '" + rhombus4.calcuateArea() + "'.");
+        System.out.println("Rhombus5 has area of '" + rhombus5.calcuateArea() + "'.");
+        //кінець виводу площі
         table.put(new Perimeter(rhombus1.calculatePerimeter()), rhombus1);
         table.put(new Perimeter(rhombus2.calculatePerimeter()), rhombus2);
         table.put(new Perimeter(rhombus3.calculatePerimeter()), rhombus3);
@@ -54,7 +61,7 @@ public class Lab2Test {
         table.put(perimeterRhombus5, rhombus5);
         //видалення
         System.out.println("Before deleting: " + table);
-        DeletionElements.deleteElementsWithSmallerArea(100, table);
+        DeletionElements.deleteElementsWithSmallerArea(15, table);
         System.out.println("Remaining elements: " + table);
     }
 
