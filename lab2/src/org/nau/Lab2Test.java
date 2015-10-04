@@ -8,6 +8,36 @@ import static org.junit.Assert.assertEquals;
  * Тестування для лаби №2. Варіант 18.
  */
 public class Lab2Test {
+    /**
+     * Тестує метод, який видаляє елементи із хеш-таблиці.
+     */
+    @Test
+    public void testDeletion() {
+        //створити 5 ромбів
+        final Rhombus rhombus1 = new Rhombus(8, 0, 5, 3, 8, 6, 11, 3);//should not be deleted
+        //вивести ромб на екран
+        //System.out.println(PrintRhombus.makeStringWithRhombusPicture(rhombus1));
+        final Rhombus rhombus2 = new Rhombus(1, 0, 0, 1, 1, 2, 2, 1);//should be deleted
+        //System.out.println(PrintRhombus.makeStringWithRhombusPicture(rhombus2));
+        final Rhombus rhombus3 = new Rhombus(0, -1, -2, -3, -4, -1, -2, 1);
+        //System.out.println(PrintRhombus.makeStringWithRhombusPicture(rhombus3));
+        final Rhombus rhombus4 = new Rhombus(0, -1, -8, 0, 0, 1, 8, 0);
+        //System.out.println(PrintRhombus.makeStringWithRhombusPicture(rhombus4));
+        final Rhombus rhombus5 = new Rhombus(3, 2, 1, 4, 3, 6, 5, 4);
+        //System.out.println(PrintRhombus.makeStringWithRhombusPicture(rhombus5));
+        //додати ромби в хеш-таблицю
+        NAUHashtable<Double, Rhombus> table = new NAUHashtable<>();
+        table.put(rhombus1.calculatePerimeter(), rhombus1);
+        table.put(rhombus2.calculatePerimeter(), rhombus2);
+        table.put(rhombus3.calculatePerimeter(), rhombus3);
+        table.put(rhombus4.calculatePerimeter(), rhombus4);
+        table.put(rhombus5.calculatePerimeter(), rhombus5);
+        //видалення
+        System.out.println("Before deleting: " + table);
+        DeletionElements.deleteElementsWithSmallerArea(10000, table);
+        System.out.println("Remaining elements: " + table);
+    }
+
     @Test
     public void testHashtable() {
         //Створення нової колекції.
