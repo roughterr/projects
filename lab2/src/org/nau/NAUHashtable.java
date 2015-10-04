@@ -65,6 +65,7 @@ public class NAUHashtable<K, V> {
         } else {
             indexToPush = indexOfExisting;
         }
+        System.out.println("Pushed to the room #" + indexToPush);
         table[indexToPush] = new HashtableEntry<>(key, value);
         return true;
     }
@@ -112,10 +113,7 @@ public class NAUHashtable<K, V> {
              hashCodeToProbe.getH() < table.length;
              hashCodeToProbe = hashCodeToProbe.next()) {
             final int index = calcIndexByHashcode(hashCodeToProbe.getHashcode());
-            System.out.println("an attempt to see the object with index '" + index + ".");
             HashtableEntry<K, V> element = table[index];
-            System.out.println("Comparing two object: first object = '" + key + "', second object ='" +
-                    (element == null ? "null" : element.getKey()) + "'.");
             if (element != null) {
                 final boolean resultOfComparison = key.equals(element.getKey());
                 System.out.println("resultOfComparison='" + resultOfComparison + "'.");

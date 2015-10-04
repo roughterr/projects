@@ -29,18 +29,32 @@ public class Lab2Test {
         //System.out.println(PrintRhombus.makeStringWithRhombusPicture(rhombus4));
         //final Rhombus rhombus5 = new Rhombus(3, 2, 1, 4, 3, 6, 5, 4);
         //final Rhombus rhombus5 = new Rhombus(-1, 0, 0, -1, -1, -2, -2, -1);
-        final Rhombus rhombus5 = new Rhombus(5, 1, 2, 4, 5, 7, 8, 4);
+        //final Rhombus rhombus5 = new Rhombus(5, 1, 2, 4, 5, 7, 8, 4);
+        final Rhombus rhombus5 = new Rhombus(4, 6, 7, 10, 10, 6, 7, 2);
         System.out.println(PrintRhombus.makeStringWithRhombusPicture(rhombus5));
         //додати ромби в хеш-таблицю
         NAUHashtable<Perimeter, Rhombus> table = new NAUHashtable<>();
+        //let's say rhombus4 and rhombus5 have the same hashcode of their perimeter object
+        final Perimeter perimeterRhombus4 = new Perimeter(rhombus4.calculatePerimeter()) {
+            @Override
+            public int hashCode() {
+                return 17;
+            }
+        };
+        final Perimeter perimeterRhombus5 = new Perimeter(rhombus5.calculatePerimeter()) {
+            @Override
+            public int hashCode() {
+                return 17;
+            }
+        };
         table.put(new Perimeter(rhombus1.calculatePerimeter()), rhombus1);
         table.put(new Perimeter(rhombus2.calculatePerimeter()), rhombus2);
         table.put(new Perimeter(rhombus3.calculatePerimeter()), rhombus3);
-        table.put(new Perimeter(rhombus4.calculatePerimeter()), rhombus4);
-        table.put(new Perimeter(rhombus5.calculatePerimeter()), rhombus5);
+        table.put(perimeterRhombus4, rhombus4);
+        table.put(perimeterRhombus5, rhombus5);
         //видалення
         System.out.println("Before deleting: " + table);
-        DeletionElements.deleteElementsWithSmallerArea(10000, table);
+        DeletionElements.deleteElementsWithSmallerArea(100, table);
         System.out.println("Remaining elements: " + table);
     }
 
