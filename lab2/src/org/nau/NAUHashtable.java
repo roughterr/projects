@@ -43,8 +43,7 @@ public class NAUHashtable<K, V> {
      */
     public int calcIndexByHashcode(int hashcode) {
         //0x7FFFFFFF is the biggest number
-        int calculatedIndex = (hashcode & 0x7FFFFFFF) % table.length;
-        //System.out.println("calculatedIndex='" + calculatedIndex + "'.");
+        int calculatedIndex = (hashcode & Integer.MAX_VALUE) % table.length;
         return calculatedIndex;
     }
 
@@ -56,7 +55,6 @@ public class NAUHashtable<K, V> {
      */
     public boolean put(K key, V value) {
         final int indexOfExisting = findExistingElement(key);
-        //System.out.println("indexOfExisting='" + indexOfExisting + "'.");
         final int indexToPush;
         if (indexOfExisting == -1) {
             //Знайти найближчу вільну комірку.
@@ -67,7 +65,6 @@ public class NAUHashtable<K, V> {
         } else {
             indexToPush = indexOfExisting;
         }
-        System.out.println("Pushing to the cell with index " + indexToPush);
         table[indexToPush] = new HashtableEntry<>(key, value);
         return true;
     }
@@ -134,6 +131,7 @@ public class NAUHashtable<K, V> {
             HashtableEntry<K, V> element = table[index];
             if (element == null)
                 return index;
+            System.out.println("The room is reserved. Probing the next room...");
         }
         return -1;
     }
