@@ -60,6 +60,8 @@ public class Rhombus {
      * @return
      */
     public double calculatePerimeter() {
+        final double perimeter = distanceBetweenAandB() * 4;
+        System.out.println("perimeter='" + perimeter + "'.");
         return distanceBetweenAandB() * 4;
     }
 
@@ -78,7 +80,6 @@ public class Rhombus {
     public double calcuateArea() {
         final double diagonalAC = calculateDistanceBetweenTwoPoints(a.getX(), a.getY(), c.getX(), c.getY());
         final double diagonalBD = calculateDistanceBetweenTwoPoints(b.getX(), b.getY(), d.getX(), d.getY());
-        //System.out.println("diagonalAC='" + diagonalAC + "', diagonalBD='" + diagonalBD + "'.");
         return (diagonalAC * diagonalBD) / 2.0;
     }
 

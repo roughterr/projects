@@ -132,6 +132,7 @@ public class NAUHashtable<K, V> {
             if (element == null)
                 return index;
             System.out.println("The room is reserved. Probing the next room...");
+            hashCodeToProbe = hashCodeToProbe.next();
         }
         return -1;
     }

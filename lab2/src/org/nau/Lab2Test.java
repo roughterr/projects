@@ -18,20 +18,24 @@ public class Lab2Test {
         //вивести ромб на екран
         //System.out.println(PrintRhombus.makeStringWithRhombusPicture(rhombus1));
         final Rhombus rhombus2 = new Rhombus(1, 0, 0, 1, 1, 2, 2, 1);//should be deleted
+        System.out.println("hashCode of rhombus2 is '" + rhombus2.hashCode() + "'.");
         //System.out.println(PrintRhombus.makeStringWithRhombusPicture(rhombus2));
         final Rhombus rhombus3 = new Rhombus(0, -1, -2, -3, -4, -1, -2, 1);
+        System.out.println("hashCode of rhombus3 is '" + rhombus3.hashCode() + "'.");
         //System.out.println(PrintRhombus.makeStringWithRhombusPicture(rhombus3));
         final Rhombus rhombus4 = new Rhombus(0, -1, -8, 0, 0, 1, 8, 0);
         //System.out.println(PrintRhombus.makeStringWithRhombusPicture(rhombus4));
-        final Rhombus rhombus5 = new Rhombus(3, 2, 1, 4, 3, 6, 5, 4);
-        //System.out.println(PrintRhombus.makeStringWithRhombusPicture(rhombus5));
+        //final Rhombus rhombus5 = new Rhombus(3, 2, 1, 4, 3, 6, 5, 4);
+        //final Rhombus rhombus5 = new Rhombus(-1, 0, 0, -1, -1, -2, -2, -1);
+        final Rhombus rhombus5 = new Rhombus(5, 1, 2, 4, 5, 7, 8, 4);
+        System.out.println(PrintRhombus.makeStringWithRhombusPicture(rhombus5));
         //додати ромби в хеш-таблицю
-        NAUHashtable<Double, Rhombus> table = new NAUHashtable<>();
-        table.put(rhombus1.calculatePerimeter(), rhombus1);
-        table.put(rhombus2.calculatePerimeter(), rhombus2);
-        table.put(rhombus3.calculatePerimeter(), rhombus3);
-        table.put(rhombus4.calculatePerimeter(), rhombus4);
-        table.put(rhombus5.calculatePerimeter(), rhombus5);
+        NAUHashtable<Perimeter, Rhombus> table = new NAUHashtable<>();
+        table.put(new Perimeter(rhombus1.calculatePerimeter()), rhombus1);
+        table.put(new Perimeter(rhombus2.calculatePerimeter()), rhombus2);
+        table.put(new Perimeter(rhombus3.calculatePerimeter()), rhombus3);
+        table.put(new Perimeter(rhombus4.calculatePerimeter()), rhombus4);
+        table.put(new Perimeter(rhombus5.calculatePerimeter()), rhombus5);
         //видалення
         System.out.println("Before deleting: " + table);
         DeletionElements.deleteElementsWithSmallerArea(10000, table);
