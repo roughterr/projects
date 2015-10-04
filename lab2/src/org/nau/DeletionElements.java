@@ -8,10 +8,10 @@ import java.util.function.Function;
 public class DeletionElements {
     /**
      * Видаляє елементи із хеш-таблиці
-     * @param area
+     * @param area мінімальна площа ромба
      * @param hashtable
      */
-    public <K> void deleteElementsWithSmallerArea(double area, NAUHashtable<K, Rhombus> hashtable) {
+    public static <K> void deleteElementsWithSmallerArea(double area, NAUHashtable<K, Rhombus> hashtable) {
         hashtable.remove(entry -> entry.getValue().calcuateArea() < area);
     }
 }
