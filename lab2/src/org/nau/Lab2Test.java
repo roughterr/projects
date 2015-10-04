@@ -3,6 +3,8 @@ package org.nau;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Тестування для лаби №2. Варіант 18.
@@ -40,6 +42,23 @@ public class Lab2Test {
         System.out.println("Before deleting: " + table);
         DeletionElements.deleteElementsWithSmallerArea(10000, table);
         System.out.println("Remaining elements: " + table);
+    }
+
+    /**
+     * Перевірка вставки нового запису з однаковим ключем, в хеш-таблицю, в якій ключ - це периметер.
+     */
+    @Test
+    public void testPerimeterSubstitution() {
+        final Perimeter perimeter1 = new Perimeter(1.0);
+        final Perimeter perimeter2 = new Perimeter(1.0);
+        final Rhombus rhombus1 = new Rhombus(1, 0, 0, 1, 1, 2, 2, 1);
+        final Rhombus rhombus2 = new Rhombus(-1, 0, 0, -1, -1, -2, -2, -1);
+        NAUHashtable<Perimeter, Rhombus> hashtable = new NAUHashtable<>();
+        hashtable.put(perimeter1, rhombus1);
+        assertTrue("Rhombus #1 has not been found in the hastable.", hashtable.containsValue(rhombus1));
+        hashtable.put(perimeter2, rhombus2);
+        //хеш-таблиця не повинна містити ромбу №1
+        assertFalse("Rhombus #1 has not been deleted from the hashtable.", hashtable.containsValue(rhombus1));
     }
 
     @Test

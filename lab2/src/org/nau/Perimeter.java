@@ -15,8 +15,8 @@ public class Perimeter {
         return value;
     }
 
-    public boolean equals(Perimeter perimeter) {
-        return perimeter == null ? false : perimeter.getValue() == value;
+    public boolean equals(Object obj) {
+        return obj == null ? false : obj instanceof Perimeter ? ((Perimeter) obj).getValue() == value : super.equals(obj);
     }
 
     @Override
