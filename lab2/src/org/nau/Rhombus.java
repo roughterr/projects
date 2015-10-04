@@ -1,7 +1,6 @@
 package org.nau;
 
-import java.util.Formatter;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Ромб: координати вершин, конструктор, методи обчислення площини, периметру, виведення об'єкта.
@@ -26,14 +25,14 @@ public class Rhombus {
 
     /**
      * Конструктор.
-     * @param aX
-     * @param aY
-     * @param bX
-     * @param bY
-     * @param cX
-     * @param cY
-     * @param dX
-     * @param dY
+     * @param aX координата x вершини A
+     * @param aY координата y вершини A
+     * @param bX координата x вершини B
+     * @param bY координата y вершини B
+     * @param cX координата x вершини C
+     * @param cY координата y вершини C
+     * @param dX координата x вершини D
+     * @param dY координата y вершини D
      */
     public Rhombus(int aX, int aY, int bX, int bY, int cX, int cY, int dX, int dY) {
         a = new Vertex(aX, aY);
@@ -43,7 +42,7 @@ public class Rhombus {
     }
 
     /**
-     * Конструктор
+     * Конструктор.
      * @param vertex1 першиа вершина ромба
      * @param vertex2 друга вершина ромба
      * @param vertex3 третя вершина ромба
@@ -99,7 +98,7 @@ public class Rhombus {
     }
 
     /**
-     * Генерує новий ромб
+     * Генерує новий ромб.
      * @return
      */
     public static Rhombus generateNewRhombus() {
@@ -137,5 +136,28 @@ public class Rhombus {
 
     public Vertex getVertexD() {
         return d;
+    }
+
+    /**
+     * Метод, який генерує хеш-код об’єкту Ромб. Використовує множення для створення хеш-коду.
+     * Як варіант - метод визначає хеш-код за допомогою наступний параметрів:
+     * <ul>
+     * <li>площа ромба</li>
+     * <li>значення найменшого ікса</li>
+     * <li>значення найбільшого ікса</li>
+     * <li>значення найменшого ігрика</li>
+     * <li>значення найбільшого ігрика</li>
+     * </ul>
+     * @return
+     */
+    @Override
+    public int hashCode() {
+        List<Integer> allX = Arrays.asList(new Integer[]{a.getX(), b.getX(), c.getX(), d.getX()});
+        List<Integer> allY = Arrays.asList(new Integer[]{a.getY(), b.getY(), c.getY(), d.getY()});
+        int smallestX = Collections.min(allX);
+        int smallestY = Collections.min(allY);
+        int biggestX = Collections.max(allX);
+        int biggestY = Collections.max(allY);
+        return Arrays.hashCode(new Integer[]{smallestX, smallestY, biggestX, biggestY, (int) calcuateArea()});
     }
 }
