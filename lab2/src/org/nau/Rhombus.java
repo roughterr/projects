@@ -79,7 +79,7 @@ public class Rhombus {
         final double diagonalAC = calculateDistanceBetweenTwoPoints(a.getX(), a.getY(), c.getX(), c.getY());
         final double diagonalBD = calculateDistanceBetweenTwoPoints(b.getX(), b.getY(), d.getX(), d.getY());
         //System.out.println("diagonalAC='" + diagonalAC + "', diagonalBD='" + diagonalBD + "'.");
-        return (double) (diagonalAC * diagonalBD) / 2.0;
+        return (diagonalAC * diagonalBD) / 2.0;
     }
 
     /**
