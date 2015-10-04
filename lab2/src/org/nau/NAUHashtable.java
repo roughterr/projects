@@ -125,14 +125,14 @@ public class NAUHashtable<K, V> {
      * @return індекс вільної комірки. Якщо вільної комірки не знайдено, то повернення значення -1
      */
     private int findAvailableRoomForEntry(K key) {
-        HashCodeToProbe hashCodeToProbe = new HashCodeToProbe(key.hashCode());
-        while (hashCodeToProbe.getH() < table.length) {
+        for (HashCodeToProbe hashCodeToProbe = new HashCodeToProbe(key.hashCode());
+             hashCodeToProbe.getH() < table.length;
+             hashCodeToProbe = hashCodeToProbe.next()) {
             final int index = calcIndexByHashcode(hashCodeToProbe.getHashcode());
             HashtableEntry<K, V> element = table[index];
             if (element == null)
                 return index;
             System.out.println("The room is reserved. Probing the next room...");
-            hashCodeToProbe = hashCodeToProbe.next();
         }
         return -1;
     }
