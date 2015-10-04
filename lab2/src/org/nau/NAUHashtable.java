@@ -107,15 +107,24 @@ public class NAUHashtable<K, V> {
      * @return індекс елементу. Якщо елемента не знайдено, то повернення значення -1
      */
     public int findExistingElement(K key) {
+        System.out.println("Starting method findExistingElement with argument: key='" + key + "'.");
         for (HashCodeToProbe hashCodeToProbe = new HashCodeToProbe(key.hashCode());
              hashCodeToProbe.getH() < table.length;
              hashCodeToProbe = hashCodeToProbe.next()) {
             final int index = calcIndexByHashcode(hashCodeToProbe.getHashcode());
+            System.out.println("an attempt to see the object with index '" + index + ".");
             HashtableEntry<K, V> element = table[index];
-            if (element != null && key.equals(element.getKey())) {
-                return index;
+            System.out.println("Comparing two object: first object = '" + key + "', second object ='" +
+                    (element == null ? "null" : element.getKey()) + "'.");
+            if (element != null) {
+                final boolean resultOfComparison = key.equals(element.getKey());
+                System.out.println("resultOfComparison='" + resultOfComparison + "'.");
+                if (resultOfComparison) {
+                    return index;
+                }
             }
         }
+        System.out.println("findExistingElement: the limit is reached.");
         return -1;
     }
 
@@ -179,5 +188,18 @@ public class NAUHashtable<K, V> {
                 }
             }
         }
+    }
+
+    /**
+     * Показує чи вказане значення є в хеш-таблиці.
+     * @param value значення запису хеш-таблиці
+     * @return true - запис з вказаним значенням існує, false - не існує
+     */
+    public boolean containsValue(V value) {
+        for (HashtableEntry<K, V> entry : table) {
+            return entry == null ? false : value == null && entry.getValue() == null ? true :
+                    value == null || entry.getValue() == null ? false : value.equals(entry.getValue());
+        }
+        return false;
     }
 }
