@@ -1,10 +1,11 @@
 package org.nau;
 
 import java.util.Hashtable;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
  * Хеш-таблиця.
- *
  * @param <K> тип ключа
  * @param <V> тип значення
  */
@@ -18,32 +19,37 @@ public class NAUHashtable<K, V> {
     /**
      * Розмір хеш-таблиці за замовчуванням.
      */
-    private static final int DEFAULT_SIZE = 10;
+    public static final int DEFAULT_SIZE = 10;
 
     /**
-     * Розмір хеш-таблиці.
+     * Конструктор.
      */
-    private int size;
-
     public NAUHashtable() {
+        this(DEFAULT_SIZE);
+    }
+
+    /**
+     * Конструктор, в якому можна задати розмір хеш-таблиці.
+     * @param size
+     */
+    public NAUHashtable(int size) {
         table = new HashtableEntry[DEFAULT_SIZE];
     }
 
     /**
      * Розраховує індекс елементу якщо відомий хеш-код ключа елементу.
-     *
      * @param hashcode хеш-код ключа елементу
      * @return
      */
     public int calcIndexByHashcode(int hashcode) {
-        int calcuatedIndex = (hashcode & 0x7FFFFFFF) % table.length;
-        System.out.println("calcuatedIndex='" + calcuatedIndex + "'.");
-        return calcuatedIndex;
+        //0x7FFFFFFF is the biggest number
+        int calculatedIndex = (hashcode & 0x7FFFFFFF) % table.length;
+        System.out.println("calculatedIndex='" + calculatedIndex + "'.");
+        return calculatedIndex;
     }
 
     /**
      * Вставляє елемент в хеш-таблицю.
-     *
      * @param key
      * @param value
      * @return true - вставка пройшла успішно. false - не вдалось додати елемент
@@ -99,7 +105,6 @@ public class NAUHashtable<K, V> {
 
     /**
      * Здійснює пошук елементу в хеш-таблиці.
-     *
      * @param key ключ елементу
      * @return індекс елементу. Якщо елемента не знайдено, то повернення значення -1
      */
@@ -118,7 +123,6 @@ public class NAUHashtable<K, V> {
 
     /**
      * Знаходить вільну комірку для нового елементу.
-     *
      * @param key ключ елементу
      * @return індекс вільної комірки. Якщо вільної комірки не знайдено, то повернення значення -1
      */
@@ -135,7 +139,6 @@ public class NAUHashtable<K, V> {
 
     /**
      * Отримує значення елементу хеш-таблиці.
-     *
      * @param key ключ
      * @return значення
      */
@@ -146,7 +149,6 @@ public class NAUHashtable<K, V> {
 
     /**
      * Виводить інформацію про хеш-таблицю.
-     *
      * @return
      */
     @Override
@@ -160,5 +162,21 @@ public class NAUHashtable<K, V> {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Видаляє усі елементи, які для яких виконується певна умова.
+     * @param function фукція, яка приймає на вхід ключ і значення елементу хеш-таблиці, а виводить логічне значення.
+     */
+    public void remove(Function<HashtableEntry<K, V>, Boolean> function) {
+        //for (HashtableEntry<K, V> entry : table) {
+        for (int i = 0; i < table.length; i++) {
+            final HashtableEntry<K, V> entry = table[i];
+            if (entry != null) {
+                if (function.apply(entry)) {
+                    table[i] = null;
+                }
+            }
+        }
     }
 }

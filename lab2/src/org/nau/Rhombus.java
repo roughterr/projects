@@ -152,12 +152,13 @@ public class Rhombus {
      */
     @Override
     public int hashCode() {
-        List<Integer> allX = Arrays.asList(new Integer[]{a.getX(), b.getX(), c.getX(), d.getX()});
-        List<Integer> allY = Arrays.asList(new Integer[]{a.getY(), b.getY(), c.getY(), d.getY()});
-        int smallestX = Collections.min(allX);
-        int smallestY = Collections.min(allY);
-        int biggestX = Collections.max(allX);
-        int biggestY = Collections.max(allY);
-        return Arrays.hashCode(new Integer[]{smallestX, smallestY, biggestX, biggestY, (int) calcuateArea()});
+        //List<Integer> allX = Arrays.asList(new Integer[]{a.getX(), b.getX(), c.getX(), d.getX()});
+        //List<Integer> allY = Arrays.asList(new Integer[]{a.getY(), b.getY(), c.getY(), d.getY()});
+        //int smallestX = Collections.min(allX);
+        //int smallestY = Collections.min(allY);
+        //int biggestX = Collections.max(allX);
+        //int biggestY = Collections.max(allY);
+        //return Arrays.hashCode(new Integer[]{smallestX, smallestY, biggestX, biggestY, (int) calcuateArea()});
+        return a.getX() * a.getY() * b.getX() * b.getY() * c.getX() * c.getY() * d.getX() * d.getY();
     }
 }
