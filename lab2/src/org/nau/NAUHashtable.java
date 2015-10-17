@@ -189,8 +189,11 @@ public class NAUHashtable<K, V> {
      */
     public boolean containsValue(V value) {
         for (HashtableEntry<K, V> entry : table) {
-            return entry == null ? false : value == null && entry.getValue() == null ? true :
-                    value == null || entry.getValue() == null ? false : value.equals(entry.getValue());
+            if (value != null && entry != null && entry.getValue() != null && value.equals(entry.getValue())) {
+                return true;
+            }
+            //return entry == null ? false : value == null && entry.getValue() == null ? true :
+            //        value == null || entry.getValue() == null ? false : value.equals(entry.getValue());
         }
         return false;
     }

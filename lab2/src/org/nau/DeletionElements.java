@@ -1,7 +1,5 @@
 package org.nau;
 
-import java.util.function.Function;
-
 /**
  * Містить метод для видалення тих елементів із хеш-таблиці, в яких площа менша заданої.
  */
