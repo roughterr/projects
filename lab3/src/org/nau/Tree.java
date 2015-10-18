@@ -1,5 +1,6 @@
 package org.nau;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -16,26 +17,46 @@ public class Tree {
     public void deleteElements(Function<Student, Boolean> function) {
         if (root == null)
             return;
-        //if () {
-        //}
-        //TODO
+        Node zeroNode = new Node(null);
+        zeroNode.setLeft(root);
+        //наступний рядок для наглядності
+        zeroNode.setRight(null);
+        deleteElementsOfNode(function, zeroNode);
+        root = zeroNode.getLeft();
     }
 
     private void deleteElementsOfNode(Function<Student, Boolean> function, Node node) {
         if (node == null)
             return;
-        if (node.getLeft() != null) {
-            if (function.apply(node.getLeft().getData())) {
-                node.setLeft(null);
-            } else {
-                deleteElementsOfNode(function, node.getLeft());
+        //почистити ліве піддерево
+        {
+            final Node leftNode = node.getLeft();
+            if (leftNode != null) {
+                //якщо перший елемент в лівому піддереві має бути видалений
+                if (function.apply(leftNode.getData())) {
+                    deleteElement(leftNode, (nodeToReplace) -> {
+                        node.setLeft(nodeToReplace);
+                    });
+                    deleteElementsOfNode(function, node);
+                } else {
+                    deleteElementsOfNode(function, leftNode);
+                }
             }
         }
-        if (node.getRight() != null) {
-            if (function.apply(node.getRight().getData())) {
-                node.setRight(null);
-            } else {
-                deleteElementsOfNode(function, node.getRight());
+        //почистити праве піддерево
+        {
+            final Node rightNode = node.getRight();
+            if (rightNode != null) {
+                //якщо перший елемент в лівому піддереві має бути видалений
+                if (function.apply(rightNode.getData())) {
+                    deleteElement(rightNode, (nodeToReplace) -> {
+                        node.setRight(nodeToReplace);
+                    });
+                    System.out.println("The element was supposed to be deleted.");
+                    deleteElementsOfNode(function, node);
+                } else {
+                    deleteElementsOfNode(function, rightNode);
+                }
             }
         }
     }
@@ -125,5 +146,47 @@ public class Tree {
             }
         }
         return true;
+    }
+
+    /**
+     * Видаляє елемент з дерева. Алгоритм наступний:
+     * <ol>
+     * <li>Найти удаляемый узел</li>
+     * <li>Оценить имеет ли найденный узел левое и правое поддерево:
+     * <ul>
+     * <li>не имеет (ссылка обнуляется)</li>
+     * <li>имеет либо левое, либо правое поддерево (ссылка переопределяется в соответствующее поддерево)</li>
+     * <li>имеет оба поддерева (осуществляется поиск узла, стоящего на самом низшем уровне (лист) для замены
+     * удаляемого)</li>
+     * </ul>
+     * </li>
+     * </ol>
+     * Существует два варианта поиска узла для замены:
+     * <ul>
+     * <li>самый крайний правый узел в левом поддереве</li>
+     * <li>самый крайний левый узел в правом поддереве</li>
+     * <ul/>
+     * @param nodeToBeDeleted   елемент, який має бути видалений
+     * @param functionToReplace фукція для заміщення елемента, який має бути видалений, іншим елементом
+     */
+    private void deleteElement(Node nodeToBeDeleted, Consumer<Node> functionToReplace) {
+        if (nodeToBeDeleted.getLeft() == null && nodeToBeDeleted.getRight() == null) {
+            functionToReplace.accept(null);
+        } else if (nodeToBeDeleted.getLeft() == null ^ nodeToBeDeleted.getRight() == null) {
+            functionToReplace.accept(nodeToBeDeleted.getLeft() == null ? nodeToBeDeleted.getRight() :
+                    nodeToBeDeleted.getLeft());
+        } else {
+            //вибрати праве піддерево
+            final Node rightSubtree = nodeToBeDeleted.getRight();
+            //пошук крайнього лівого вузла
+            if (rightSubtree != null) {
+                //пошук найлівішого елементу
+                Node theMostLeft = rightSubtree;
+                while (theMostLeft.getLeft() != null) {
+                    theMostLeft = theMostLeft.getLeft();
+                }
+                functionToReplace.accept(theMostLeft);
+            }
+        }
     }
 }
