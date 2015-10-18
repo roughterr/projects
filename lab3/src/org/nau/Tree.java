@@ -25,7 +25,7 @@ public class Tree {
         root = zeroNode.getLeft();
     }
 
-    private void deleteElementsOfNode(Function<Student, Boolean> function, Node node) {
+    private void deleteElementsOfNode(Function<Student, Boolean> function, final Node node) {
         if (node == null)
             return;
         //почистити ліве піддерево
@@ -52,7 +52,6 @@ public class Tree {
                     deleteElement(rightNode, (nodeToReplace) -> {
                         node.setRight(nodeToReplace);
                     });
-                    System.out.println("The element was supposed to be deleted.");
                     deleteElementsOfNode(function, node);
                 } else {
                     deleteElementsOfNode(function, rightNode);
@@ -170,23 +169,25 @@ public class Tree {
      * @param functionToReplace фукція для заміщення елемента, який має бути видалений, іншим елементом
      */
     private void deleteElement(Node nodeToBeDeleted, Consumer<Node> functionToReplace) {
+        //System.out.println("Deleting the next student: " + nodeToBeDeleted.getData());
         if (nodeToBeDeleted.getLeft() == null && nodeToBeDeleted.getRight() == null) {
             functionToReplace.accept(null);
         } else if (nodeToBeDeleted.getLeft() == null ^ nodeToBeDeleted.getRight() == null) {
             functionToReplace.accept(nodeToBeDeleted.getLeft() == null ? nodeToBeDeleted.getRight() :
                     nodeToBeDeleted.getLeft());
         } else {
-            //вибрати праве піддерево
             final Node rightSubtree = nodeToBeDeleted.getRight();
-            //пошук крайнього лівого вузла
-            if (rightSubtree != null) {
-                //пошук найлівішого елементу
-                Node theMostLeft = rightSubtree;
-                while (theMostLeft.getLeft() != null) {
-                    theMostLeft = theMostLeft.getLeft();
-                }
-                functionToReplace.accept(theMostLeft);
+            //пошук найлівішого елементу в правому піддереві
+            Node theMostLeft = rightSubtree;
+            while (theMostLeft.getLeft() != null) {
+                theMostLeft = theMostLeft.getLeft();
             }
+            functionToReplace.accept(theMostLeft);
+            //приєднати лівий
+            theMostLeft.setLeft(nodeToBeDeleted.getLeft());
+            //Щоб не було циклічної залежності
+            if (nodeToBeDeleted.getRight() != theMostLeft)
+                theMostLeft.setRight(nodeToBeDeleted.getRight());
         }
     }
 }
