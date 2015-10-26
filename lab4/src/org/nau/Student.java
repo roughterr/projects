@@ -23,7 +23,7 @@ public class Student {
      * @param optionalLessons чи ходить студент на факультатив
      * @param mark            бал
      */
-    private Student(String lastName, String firstName, boolean optionalLessons, int mark) {
+    public Student(String lastName, String firstName, boolean optionalLessons, int mark) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.optionalLessons = optionalLessons;
@@ -57,5 +57,10 @@ public class Student {
      */
     public int getMark() {
         return mark;
+    }
+
+    public String toString() {
+        return "mark='" + mark + "', firstName='" + firstName + "', optionalLessons='" + optionalLessons +
+                "', lastName='" + lastName + "'.";
     }
 }
